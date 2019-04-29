@@ -59,7 +59,11 @@ namespace BusquedaEnGrafo
                     //Sino es el nodo final
                     else
                     {
-                        nodosPorVisitar.AddNode(nodoHijo, nodosVisitados);
+                        bool estaEnNodosVisitados = nodosVisitados.Select(n => n.value).Contains(nodoHijo.value);
+                        if (!estaEnNodosVisitados)
+                        {
+                            nodosPorVisitar.AddNode(nodoHijo);
+                        }                        
                     }
                 }
             }

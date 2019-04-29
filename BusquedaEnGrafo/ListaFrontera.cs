@@ -61,33 +61,26 @@ namespace BusquedaEnGrafo
         /// Agregar un nodo al listado que corresponda segun el tipo de busqueda
         /// </summary>
         /// <param name="node">Nodo a agregar al listado</param>
-        /// <param name="nodosVisitados">Lista de nodos visitados, para verificar que el nodo enviado no este en el mismo. Opcional</param>
-        public void AddNode(Node node, List<Node> nodosVisitados = null)
+        public void AddNode(Node node)
         {
-            bool estaEnNodosVisitados = false;
-            if (nodosVisitados != null)
-            {
-                estaEnNodosVisitados = nodosVisitados.Select(n => n.value).Contains(node.value);
-            }
-
             switch (searchType)
             {
                 case Ctes.SearchType.fifoSearch:
                     bool estaEnQueue = queue.Select(n => n.value).Contains(node.value);
 
-                    if (!estaEnQueue && !estaEnNodosVisitados)
+                    if (!estaEnQueue)
                         queue.Enqueue(node);
                     break;
                 case Ctes.SearchType.lifoSearch:
                     bool estaEnStack = stack.Select(n => n.value).Contains(node.value);
 
-                    if (!estaEnStack && !estaEnNodosVisitados)
+                    if (!estaEnStack)
                         stack.Push(node);
                     break;
                 case Ctes.SearchType.aVaraSearch:
                     bool estaEnList = list.Select(n => n.value).Contains(node.value);
 
-                    if (!estaEnList && !estaEnNodosVisitados)
+                    if (!estaEnList)
                         list.Add(node);
                     break;
                 case Ctes.SearchType.aEstrellaSearch:
